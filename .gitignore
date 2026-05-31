@@ -33,3 +33,5 @@ env/
 gen-pdf-guide.cjs
 tmp-node*.log
 jarvis-server*.log
+Guia-Instalacao-JARVIS-v8.1.pdf
+ROTEIRO-AULA-JARVIS-v8.1.pdf
