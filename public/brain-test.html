@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html><head>
+<title>Brain GLB Test</title>
+<style>body{margin:0;background:#111;overflow:hidden;} #log{position:fixed;top:10px;left:10px;color:#0f0;font:12px monospace;z-index:10;white-space:pre;}</style>
+</head><body>
+<div id="log">Initializing...</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<script>
+const log = document.getElementById('log');
+function addLog(msg) { log.textContent += '\n' + msg; }
+
+addLog('THREE loaded: ' + (typeof THREE !== 'undefined'));
+addLog('GLTFLoader: ' + (typeof THREE.GLTFLoader !== 'undefined'));
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 100);
+camera.position.set(0, 0, 5);
+const renderer = new THREE.WebGLRenderer({antialias: true});
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearColor(0x111122);
+document.body.appendChild(renderer.domElement);
+
+// Red cube as sanity check
+const cube = new THREE.Mesh(new THREE.BoxGeometry(0.5,0.5,0.5), new THREE.MeshBasicMaterial({color:0xff0000, wireframe:true}));
+cube.position.set(-2, 0, 0);
+scene.add(cube);
+addLog('Red cube added (should be visible on left)');
+
+// Load brain
+if (typeof THREE.GLTFLoader !== 'undefined') {
+  const loader = new THREE.GLTFLoader();
+  addLog('Loading /brain.glb ...');
+  loader.load('/brain.glb',
+    function(gltf) {
+      addLog('LOADED! scene children: ' + gltf.scene.children.length);
+      gltf.scene.traverse(function(c) {
+        if (c.isMesh) {
+          addLog('  Mesh: ' + c.name + ' | verts: ' + (c.geometry.attributes.position ? c.geometry.attributes.position.count : '?'));
+          c.material = new THREE.MeshBasicMaterial({color: 0x00e4ff, wireframe: true, transparent: true, opacity: 0.4});
+        }
+      });
+      var box = new THREE.Box3().setFromObject(gltf.scene);
+      var center = box.getCenter(new THREE.Vector3());
+      var size = box.getSize(new THREE.Vector3());
+      addLog('Size: ' + size.x.toFixed(2) + 'x' + size.y.toFixed(2) + 'x' + size.z.toFixed(2));
+      gltf.scene.position.sub(center);
+      gltf.scene.scale.setScalar(3 / Math.max(size.x, size.y, size.z));
+      scene.add(gltf.scene);
+      addLog('Brain added to scene!');
+    },
+    function(xhr) { addLog('Progress: ' + Math.round(xhr.loaded/xhr.total*100) + '%'); },
+    function(err) { addLog('ERROR: ' + (err.message || err)); }
+  );
+} else {
+  addLog('ERROR: GLTFLoader not available!');
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  cube.rotation.y += 0.02;
+  renderer.render(scene, camera);
+}
+animate();
+addLog('Render loop started');
+</script>
+</body></html>
