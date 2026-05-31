@@ -24,6 +24,13 @@ It combines voice interaction, task execution, browser/app control, and multi-mo
 - Anthropic SDK / Claude CLI
 - Codex CLI fallback orchestration
 - Puppeteer + Python utilities
+- Speech Recognition
+- Voice Commands
+- Workflow Automation
+
+## Project Purpose
+
+This project was created to explore how AI assistants can combine voice interaction, task automation, browser control, and multi-model orchestration to improve personal productivity.
 
 ## Requirements
 
