@@ -4,8 +4,8 @@ node_modules/
 *.log
 system/JARVIS-MEMORY.md
 system/JARVIS-HISTORY.json
-system/FELIPE-MEMORY.md
-system/FELIPE-HISTORY.json
+system/YAGO-MEMORY.md
+system/YAGO-HISTORY.json
 system/memory-embeddings.json
 system/last-audio*
 system/workflows/

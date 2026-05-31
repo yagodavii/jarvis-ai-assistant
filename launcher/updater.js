@@ -1,6 +1,6 @@
-// FELIPE Auto-Updater
+// YAGO Auto-Updater
 // Checks GitHub for new versions and applies updates
-// Read-only token with access to only the FELIPE repo
+// Read-only token with access to only the YAGO repo
 
 const https = require('https');
 const fs = require('fs');
@@ -20,13 +20,13 @@ const PROTECTED_PATHS = [
   // Dados pessoais do aluno
   '.env',                              // Chave OpenAI
   'Documents and Projects',            // Arquivos criados pelo aluno
-  'system/FELIPE-MEMORY.md',           // Memoria personalizada
-  'system/FELIPE-HISTORY.json',        // Historico de conversas
+  'system/YAGO-MEMORY.md',             // Memoria personalizada
+  'system/YAGO-HISTORY.json',          // Historico de conversas
   'system/JARVIS-MEMORY.md',           // Memoria legada
   'system/JARVIS-HISTORY.json',        // Historico legado
   'system/memory-embeddings.json',     // RAG embeddings
   // Infraestrutura
-  'FELIPE-Launcher.exe',               // Auto-atualizacao do .exe e separada
+  'YAGO-Launcher.exe',                 // Auto-atualizacao do .exe e separada
   '.felipe-launcher-config.json',
   // node_modules AGORA e atualizavel via zipball (sincroniza com o repo)
 ];
@@ -38,7 +38,7 @@ function githubRequest(urlPath, options = {}) {
       path: urlPath,
       method: options.method || 'GET',
       headers: {
-        'User-Agent': 'FELIPE-Launcher',
+        'User-Agent': 'YAGO-Launcher',
         'Accept': 'application/vnd.github.v3+json',
         ...options.headers,
       },
@@ -118,7 +118,7 @@ function downloadZipball() {
           downloadFrom(
             redirect.hostname,
             redirect.pathname + redirect.search,
-            { 'User-Agent': 'FELIPE-Launcher' }
+            { 'User-Agent': 'YAGO-Launcher' }
           );
           return;
         }
@@ -142,7 +142,7 @@ function downloadZipball() {
       'api.github.com',
       `/repos/${REPO_OWNER}/${REPO_NAME}/zipball/${REPO_BRANCH}`,
       {
-        'User-Agent': 'FELIPE-Launcher',
+        'User-Agent': 'YAGO-Launcher',
         'Authorization': `Bearer ${GITHUB_TOKEN}`,
       }
     );
