@@ -1,45 +1,90 @@
 # JARVIS AI Assistant
 
-JARVIS (Just A Rather Very Intelligent System) is a local AI assistant inspired by Tony Stark's interface.
-It combines voice interaction, task execution, browser/app control, and multi-model orchestration with automatic fallback between Claude Code and Codex.
+JARVIS is a local AI-powered assistant designed to connect natural language, voice commands, AI orchestration, browser control, and workflow automation into one productivity system.
 
-## Author
+The project explores how AI agents can transform user intent into real actions, such as opening tools, controlling browser flows, executing local commands, generating documents, and supporting daily automation tasks.
 
-**Yago Davi Cerqueira Nogueira**
+## Problem Solved
+
+Many repetitive computer tasks still require manual interaction: opening tools, navigating systems, searching information, triggering commands, generating documents, or switching between AI tools manually.
+
+JARVIS was built to reduce this friction by allowing users to interact with a local assistant through voice and text, while the system handles execution, orchestration, and fallback between AI tools.
+
+## Business Value
+
+This type of assistant can be adapted for:
+
+* Internal productivity assistants
+* AI-powered workflow automation
+* Customer support operations
+* Back-office task automation
+* Browser-based process automation
+* Developer productivity tools
+* Document and PDF workflow generation
+* Multi-model AI orchestration
+
+The main value is reducing repetitive manual work and creating a bridge between AI reasoning and real system actions.
 
 ## Core Features
 
-- Real-time voice mode (mic + speech response)
-- Wake-word activation (`Jarvis`)
-- Fast local command execution (apps, URLs, system tasks)
-- Claude Code as primary engine with Codex fallback when Claude usage is at limit
-- Automatic return to Claude when usage is available again
-- Screen analysis and automation helpers
-- PDF generation and document workflow utilities
+* Real-time voice interaction
+* Wake-word activation using "Jarvis"
+* Local command execution for apps, URLs, and system tasks
+* Browser control and automation helpers
+* Screen analysis support
+* PDF generation and document workflow utilities
+* Claude Code as the primary reasoning/coding engine
+* Codex CLI fallback when Claude usage is unavailable
+* Automatic return to Claude when usage becomes available again
+* Multi-tool orchestration for productivity workflows
+
+## What I Built
+
+I designed and implemented the assistant structure, including:
+
+* Voice command flow
+* Command normalization and intent handling
+* Local task execution logic
+* Browser automation helpers
+* AI tool orchestration
+* Claude/Codex fallback flow
+* Environment configuration
+* Documentation
+* Safety rules for local and destructive commands
+
+## Technical Challenges
+
+Some of the main challenges were:
+
+* Mapping natural voice commands to reliable actions
+* Handling different variations of spoken input
+* Keeping AI-generated code under human validation
+* Managing fallback between different AI tools
+* Avoiding unsafe execution of destructive system actions
+* Keeping sensitive credentials outside the repository
+* Structuring the project so it could grow into a more agentic workflow system
 
 ## Tech Stack
 
-- Node.js + Express
-- OpenAI API (TTS/STT/Realtime)
-- Anthropic SDK / Claude CLI
-- Codex CLI fallback orchestration
-- Puppeteer + Python utilities
-- Speech Recognition
-- Voice Commands
-- Workflow Automation
-
-## Project Purpose
-
-This project was created to explore how AI assistants can combine voice interaction, task automation, browser control, and multi-model orchestration to improve personal productivity.
+* Node.js
+* Express
+* OpenAI API
+* Anthropic SDK / Claude CLI
+* Codex CLI
+* Puppeteer
+* Python utilities
+* Speech Recognition
+* Voice Commands
+* Workflow Automation
 
 ## Requirements
 
-- Node.js 18+
-- Python 3.11+
-- OpenAI API key
-- Claude Code CLI installed and authenticated
-- Codex CLI installed and authenticated
-- Google Chrome
+* Node.js 18+
+* Python 3.11+
+* OpenAI API key
+* Claude Code CLI installed and authenticated
+* Codex CLI installed and authenticated
+* Google Chrome
 
 ## Quick Start
 
@@ -48,15 +93,15 @@ npm install
 npm run start
 ```
 
-Server default URL:
+Default server URL:
 
-```text
+```txt
 http://localhost:3000
 ```
 
 ## Environment Variables
 
-Create a `.env` file at the project root (already ignored by git):
+Create a `.env` file at the project root:
 
 ```env
 OPENAI_API_KEY=your_openai_key
@@ -64,17 +109,19 @@ OPENAI_API_KEY=your_openai_key
 
 Add any other local credentials required by your setup.
 
-## Git Ignore Notes
+## Security Notes
 
 This repository is configured to avoid committing sensitive or machine-specific files, including:
 
-- `.env` and local env variants
-- `node_modules/`
-- logs (`*.log`)
-- local memory/history files under `system/`
-- generated workspace content under `Documents and Projects/`
+* `.env` and local environment variants
+* `node_modules/`
+* logs
+* local memory/history files
+* generated workspace content
+* personal documents or local project files
 
 ## Disclaimer
 
-This is a personal AI assistant project for productivity and automation.  
-Use destructive system actions (shutdown/restart/process control) responsibly.
+This is a personal AI assistant project for productivity, automation, and AI orchestration.
+
+Use destructive system actions such as shutdown, restart, process control, or file operations responsibly.
